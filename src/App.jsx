@@ -7,6 +7,11 @@ import CartDrawer from "./components/CartDrawer.jsx";
 import Home from "./pages/Home.jsx";
 import ModelsPage from "./pages/ModelsPage.jsx";
 import MaterialsPage from "./pages/MaterialsPage.jsx";
+import AdminLayout from "./pages/admin/AdminLayout.jsx";
+import Dashboard from "./pages/admin/Dashboard.jsx";
+import AdminProducts from "./pages/admin/AdminProducts.jsx";
+import AdminOrders from "./pages/admin/AdminOrders.jsx";
+import { AdminUsers, AdminSubscribers } from "./pages/admin/AdminPeople.jsx";
 
 // new page -> top of page; a #hash -> scroll to that section
 function ScrollManager() {
@@ -22,6 +27,27 @@ function ScrollManager() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+
+  // the admin panel has its own layout: no shop header, footer, bag or sign-in popup
+  if (pathname.startsWith("/admin")) {
+    return (
+      <>
+        <ScrollManager />
+        <Routes>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="subscribers" element={<AdminSubscribers />} />
+            <Route path="*" element={<p className="status status--left">Page not found.</p>} />
+          </Route>
+        </Routes>
+      </>
+    );
+  }
+
   return (
     <>
       <ScrollManager />

@@ -273,3 +273,14 @@ input { height: 44px; padding: 0 12px; border: 1px solid #d9ccb6; background: #f
   .swatches { gap: 10px; }
   .buyrow .qty--lg { width: 100%; justify-content: space-between; }
 }
+
+/* ---------- Google / Apple sign-in buttons ---------- */
+.social { display: flex; flex-direction: column; gap: 10px; }
+.social__google { min-height: 44px; width: 100%; display: flex; justify-content: center; }
+.social__btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 44px; padding: 0 16px;
+  border: 1px solid #d9ccb6; background: #fff; color: #1f1a15; font-family: var(--sans); font-size: 14px; font-weight: 500; letter-spacing: .01em; transition: border-color .2s, background .2s; }
+.social__btn:hover:not(:disabled) { border-color: #b9a47c; }
+.social__btn--apple { background: #000; border-color: #000; color: #fff; }
+.social__btn--apple:hover:not(:disabled) { background: #2b2620; border-color: #2b2620; }
+.or { display: flex; align-items: center; gap: 12px; color: #8d8272; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: #e3d8c6; }

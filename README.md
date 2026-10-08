@@ -34,3 +34,14 @@ The photos are not in the repo. Put them in `public/images/` with these names; u
 | Newsletter | `POST /newsletter` |
 
 Backend: run `npm run seed` once to create Model 01 / Model 02.
+
+## Sign in with Google / Apple
+
+Both buttons are in the sign-in popup. Fill these in `.env` **before building** (Vite bakes them into the bundle) and set the matching
+`GOOGLE_CLIENT_ID` / `APPLE_CLIENT_ID` in the backend `.env`:
+
+| Variable | Where it comes from |
+|---|---|
+| `VITE_GOOGLE_CLIENT_ID` | Google Cloud Console → APIs & Services → Credentials → OAuth client ID (type *Web application*). Add your site (and `http://localhost:5173`) under *Authorized JavaScript origins*. |
+| `VITE_APPLE_CLIENT_ID` | Apple Developer → Identifiers → **Services ID** (needs Sign in with Apple enabled, your domain and the return URL registered). |
+| `VITE_APPLE_REDIRECT_URI` | The return URL you registered with Apple, e.g. `https://yourdomain.com/` (must be HTTPS and a real domain; Apple does not work on localhost). |

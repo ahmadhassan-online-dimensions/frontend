@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
+import SocialButtons, { hasSocial } from "./SocialButtons.jsx";
 
 export default function AuthModal() {
   const { authOpen, setAuthOpen, login, register } = useAuth();
@@ -27,13 +28,17 @@ export default function AuthModal() {
     <div className="overlay" onClick={() => setAuthOpen(false)}>
       <form className="modal" onClick={(e) => e.stopPropagation()} onSubmit={submit}>
         <h3>{mode === "login" ? "Sign in" : "Create account"}</h3>
+
+        <SocialButtons onError={setError} />
+        {hasSocial && <div className="or"><span>or use your email</span></div>}
+
         {mode === "register" && (
           <label>Name<input required value={f.name} onChange={set("name")} autoComplete="name" /></label>
         )}
         <label>Email<input required type="email" value={f.email} onChange={set("email")} autoComplete="email" /></label>
         <label>Password<input required type="password" minLength={6} value={f.password} onChange={set("password")}
           autoComplete={mode === "login" ? "current-password" : "new-password"} /></label>
-        {error && <p className="form-error">{error}</p>}
+        {error && <p className="form-error" role="alert">{error}</p>}
         <button className="btn-dark" disabled={busy}>{busy ? "Please wait…" : mode === "login" ? "Sign in" : "Register"}</button>
         <button type="button" className="link" onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); }}>
           {mode === "login" ? "New here? Create an account" : "Have an account? Sign in"}

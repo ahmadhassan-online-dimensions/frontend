@@ -26,10 +26,14 @@ export function AuthProvider({ children }) {
   const register = useCallback(async (name, email, password) =>
     finish(await api("/users/register", { method: "POST", body: { name, email, password } })), []);
 
+  // Google: body = { credential }, Apple: body = { idToken, name? } (the provider's ID token)
+  const social = useCallback(async (provider, body) =>
+    finish(await api(`/users/${provider}`, { method: "POST", body })), []);
+
   const logout = useCallback(() => { setToken(null); setUser(null); }, []);
 
   return (
-    <AuthContext.Provider value={{ user, ready, login, register, logout, authOpen, setAuthOpen }}>
+    <AuthContext.Provider value={{ user, ready, login, register, social, logout, authOpen, setAuthOpen }}>
       {children}
     </AuthContext.Provider>
   );
